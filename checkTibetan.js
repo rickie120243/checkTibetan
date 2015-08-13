@@ -29,10 +29,10 @@ var processBampo= function(fn){
     taggedcontent.push(pageContent[i]);
   }
 
-//fs.writeFileSync("./result/"+filename+".txt",JSON.stringify(taggedcontent,""," "),"utf8");
-  console.log(taggedcontent.join(""));
+  fs.writeFileSync("./result/"+filename+".xml",taggedcontent.join(""),"utf8");
+//  console.log(taggedcontent.join(""));
 }
 
-glob("../test_kangyur/001/*.xml",function(err,files){
+glob("../derge_kangyur/001/*.xml",function(err,files){
   files.map(processBampo);
 });
