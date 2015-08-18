@@ -29,7 +29,7 @@ var processBampo= function(fn){
     taggedcontent.push(pageContent[i]);
   }
 
-  fs.writeFileSync("./result/"+filename+".xml",taggedcontent.join(""),"utf8");
+  fs.writeFileSync("./result/"+filename,taggedcontent.join(""),"utf8");
 //  console.log(taggedcontent.join(""));
 }
 
