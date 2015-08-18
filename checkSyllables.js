@@ -7,7 +7,7 @@ var indexOfSorted = function (array, obj) {
     var low = 0,
     high = array.length-1;
     while (low < high) {
-      var mid = (low + high) >> 1;  //位元右移，可視為÷2的n次分之整數部分  此時n=1
+      var mid = (low + high) >> 1;
       array[mid] < obj ? low = mid + 1 : high = mid;
     }
     if(array[low] != obj) return -1;
@@ -31,7 +31,7 @@ var checkSyllables= function(fn){
   var wrongsyllables=[];
   fn.replace(/[\u0f20-\u0fbf]+/g,function(m){
      var index = indexOfSorted(letters,m);
-      if( index == -1 &&  !(m.substr(m.length-2) == "འི" || m.substr(m.length-2) == "འོ")) {
+      if(index==-1&&!(m.substr(m.length-2)=="འི"||m.substr(m.length-2)=="འོ")){
         if(wrongsyllables.indexOf(m)==-1) wrongsyllables.push(m);
       }
     });
