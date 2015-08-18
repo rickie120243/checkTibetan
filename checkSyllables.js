@@ -14,6 +14,12 @@ var indexOfSorted = function (array, obj) {
     return low;
 }
 
+var dosort=function(arr){
+  return arr.sort(function(a,b){
+    return a[0]-b[0];
+  });
+}
+
 var findCoordinates=function(item){
   var location=0,x=new RegExp(item,"g");
   while(result=x.exec(content)){
@@ -24,7 +30,7 @@ var findCoordinates=function(item){
 var deleteDuplicate=function(m){
   return m.filter(function(elem, index, self) {
     return index==self.indexOf(elem);
-});
+  });
 } 
 
 var checkSyllables= function(fn){
@@ -38,7 +44,9 @@ var checkSyllables= function(fn){
   return wrongsyllables;
 //  fs.writeFileSync("./result/"+filename,JSON.stringify(out,""," ").replace(/\r?\n/g,"").replace(/],/g,"],\n"),"utf8");
 }
+var t=new Date();
 var arr=checkSyllables(content);
 arr=deleteDuplicate(arr);
 arr.map(findCoordinates);
-console.log(locationout);
+console.log(dosort(locationout));
+console.log(new Date()-t);
