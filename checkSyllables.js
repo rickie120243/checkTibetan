@@ -1,5 +1,5 @@
 var fs=require("fs");
-var content=fs.readFileSync("./d1_001.xml","utf8");
+var content=fs.readFileSync("./phyagchen001(with pb).xml","utf8");
 var letters=JSON.parse(fs.readFileSync("possible_root_letters_sort.json","utf8"));
 var locationout=[];
 
@@ -23,30 +23,23 @@ var dosort=function(arr){
 var findCoordinates=function(item){
   var location=0,x=new RegExp(item,"g");
   while(result=x.exec(content)){
-    locationout.push([result.index,item.length]);
+    locationout.push([result.index,item.length,item]);
   }
 }
-
-var deleteDuplicate=function(m){
-  return m.filter(function(elem, index, self) {
-    return index==self.indexOf(elem);
-  });
-} 
 
 var checkSyllables= function(fn){
   var wrongsyllables=[];
   fn.replace(/[\u0f20-\u0fbf]+/g,function(m){
      var index = indexOfSorted(letters,m);
-      if( index == -1 &&  !(m.substr(m.length-2) == "འི" || m.substr(m.length-2) == "འོ")) {//!m.substr(m.length-2).match(/[འིའོ]/)
-        wrongsyllables.push(m);
+      if( index == -1 &&  !(m.substr(m.length-2) == "འི" || m.substr(m.length-2) == "འོ")) {
+        if(wrongsyllables.indexOf(m)==-1) wrongsyllables.push(m);
       }
     });
   return wrongsyllables;
-//  fs.writeFileSync("./result/"+filename,JSON.stringify(out,""," ").replace(/\r?\n/g,"").replace(/],/g,"],\n"),"utf8");
 }
+
 var t=new Date();
 var arr=checkSyllables(content);
-arr=deleteDuplicate(arr);
 arr.map(findCoordinates);
 console.log(dosort(locationout));
 console.log(new Date()-t);
